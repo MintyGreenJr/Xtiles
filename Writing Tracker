@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            text-align: center;
+        }
+        .week {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px;
+        }
+        .week-label {
+            width: 100px;
+            text-align: right;
+            margin-right: 10px;
+        }
+        .star {
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .pink { color: #ff69b4; }
+        .green { color: #32cd32; }
+        .purple { color: #9370db; }
+        .checked { color: gold; }
+    </style>
+</head>
+<body>
+    <h1>Writing Tracker</h1>
+    <p>Klicke auf einen Stern, wenn du 20 Minuten geschrieben hast!</p>
+    <div id="tracker"></div>
+
+    <script>
+        const tracker = document.getElementById("tracker");
+        const colors = ["pink", "green", "purple"];
+        
+        for (let i = 1; i <= 52; i++) {
+            let weekDiv = document.createElement("div");
+            weekDiv.classList.add("week");
+            
+            let label = document.createElement("div");
+            label.classList.add("week-label");
+            label.textContent = "Woche " + i;
+            weekDiv.appendChild(label);
+            
+            for (let j = 0; j < 5; j++) {
+                let star = document.createElement("span");
+                star.innerHTML = "&#9733;";
+                star.classList.add("star", colors[j % colors.length]);
+                star.addEventListener("click", function() {
+                    star.classList.toggle("checked");
+                });
+                weekDiv.appendChild(star);
+            }
+            
+            tracker.appendChild(weekDiv);
+        }
+    </script>
+</body>
+</html>
